@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mini Mementos"
+  short_description: "Playable SVG objects with tactile controls and 3D views"
+  default_prompt: "Use $mini-mementos to create a playable object in the Mini Mementos style, following my reference."

@@ -1,0 +1,17 @@
+# Local reference checkout; the refined skill is tracked under skills/.
+/ai-iso-skill/
+
+# Generated review screenshots and Paper exports.
+/*.jpg
+/paper-*.svg
+/paper-icons.json
+
+# Local settings, caches, and credentials.
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+__pycache__/
+*.pyc
+*.log

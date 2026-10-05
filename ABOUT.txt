@@ -1,0 +1,70 @@
+POCKET MUSIC — FIG-1
+
+Open index.html directly in a browser. No build, dependencies, internet connection,
+or server is required. The local preview is http://localhost:3500.
+
+Controls
+  Click the casing or surrounding frame / V  Toggle front / isometric view
+  Arrow Up / Down  Browse a menu
+  Arrow Right / Enter  Select
+  Arrow Left  Back
+  W  Menu / back
+  A / Space  Play or pause
+  S  Next track; hold to fast-forward
+  D  Previous track or restart; hold to rewind
+  Trackpad scroll over the device / drag around the ring  Browse or adjust volume
+  Centre button in Now Playing  Switch the wheel between volume and seeking
+  Matching keyboard keys depress the on-page keycaps while held.
+  Quick taps stay visible briefly; leaving the tab releases every keycap.
+
+Inspection
+  3D view / I  Enter inspection mode
+  Drag  Rotate freely around the iPod; drag vertically to tilt
+  Scroll / + / -  Zoom in or out
+  Arrow keys  Rotate (hold Shift for finer steps)
+  F / B  Face the front or back toward you
+  R  Restore the initial inspection angle and zoom
+  Done inspecting  Smoothly settle back to the isometric player view
+  Escape / I  Return immediately to the isometric player view
+  Grab the iPod during its return to keep inspecting from that angle.
+  Music continues during inspection. A / Space still plays or pauses.
+
+Sound begins after pressing play, because browsers require an audio gesture.
+Thirteen original electronic instrumentals are synthesized locally with Web Audio.
+Browse all 13 under Music > Songs, or the three albums under Music > Albums.
+Each track has its own melody, chord progression and arrangement.
+Photos contains the original album art. Videos and Podcasts show empty-library states.
+
+Source
+  index.html is the complete self-contained deliverable.
+  Roboto Mono Regular and Medium are embedded for offline use; its SIL Open Font License
+  is included in index.html. The iPod LCD and hardware retain their original styling.
+  The interface uses licensed Central Icons, round outlined / radius 2 / stroke 1.5,
+  version 1.2.2. Selected SVG sources are in assets/central-icons and embedded
+  in index.html. The license key is not stored in the project.
+  Text and icons use the Radix UI Gray palette. The page follows the light/dark
+  scales; the iPod's LCD, labels and engraving use fixed light-scale Gray tokens.
+  audio-engine.js is the editable music engine source, also embedded in index.html.
+  If editing that source, replace the AUDIO_ENGINE_START / AUDIO_ENGINE_END block
+  in index.html with the updated code.
+  The casing uses finely sampled curves, a rounded metal edge profile, and
+  blended surface lighting. Bezel lips, shell seams and detailed ports define it.
+  The chrome back follows the supplied reference: pale Apple / iPod engraving,
+  8GB badge, fine print, regulatory symbols and a rolled lower steel edge.
+  inspector-geometry.js is the editable rounded 3D SVG geometry, also embedded
+  between INSPECTOR_GEOMETRY_START / INSPECTOR_GEOMETRY_END in index.html.
+  ai-iso-skill is the local upstream reference checkout, excluded from Git.
+  skills/mini-mementos contains the refined reusable skill shipped here.
+  The skill was installed at ~/.claude/skills/mini-mementos as requested.
+
+Reference: https://mrbongoc.github.io/ai-iso-skill/examples/pocket-calculator.html
+Kernel and figure style: Copyright (c) 2026 Tolga Cohce, MIT.
+The full upstream license is preserved in index.html and licenses/ai-iso-skill-MIT.txt.
+
+Paper design copy
+  https://app.paper.design/file/01M1B9X56GSA24DFVFMX4P205S/p-H-0
+  The iPod page contains an updated native isometric artboard, with editable
+  SVG layers, Roboto Mono text, Central Icons, keycaps, and existing Radix tokens.
+  The local presentation follows the updated Paper artboard: 12px panel corners,
+  compact captions and controls, 12px Central arrow icons and reduced helper text.
+  Paper contains the static design. Audio, menus and rotation run in index.html.
