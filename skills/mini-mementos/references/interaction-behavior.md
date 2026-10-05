@@ -4,7 +4,7 @@
 
 Use one action layer for pointer, keyboard, wheel, and shortcut buttons. Keep playback/menu state separate from camera state. Entering inspection, changing the page theme, or toggling front/isometric views must not reset the library, menu selection, volume, position, or active audio.
 
-The iPod reference maps Up/Down to browse, Right/Enter to select, Left to back, W to menu, A/Space to play/pause, S to next/held seek forward, and D to previous/restart/held seek backward. These mappings reflect this user's requested controls; choose meaningful mappings for a different object.
+The iPod reference maps Up/Down to browse, Right/Enter to select, Left to back, W to menu, A/Space to play/pause, S to previous/restart/held seek backward, and D to next/held seek forward. These mappings reflect this user's requested controls; choose meaningful mappings for a different object.
 
 ### Keyboard keycap feedback
 

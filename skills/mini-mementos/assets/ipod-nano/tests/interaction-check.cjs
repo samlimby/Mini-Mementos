@@ -200,7 +200,7 @@ const depressed = (h, action) => keycap(h, action).classList.contains('is-presse
 
 test('every displayed keyboard shortcut depresses immediately, stays held through repeat and releases', async () => {
   for (const [key, action] of [['ArrowUp','up'],['ArrowDown','down'],['ArrowLeft','back'],['ArrowRight','select'],
-    ['W','menu'],['a','play'],['s','next'],['d','previous']]) {
+    ['W','menu'],['a','play'],['d','next'],['s','previous']]) {
     const h = harness(); h.keyDown(key);
     assert(depressed(h, action), key);
     assert.equal(h.buttons.filter(button => button.classList.contains('is-pressed')).length, 1);
@@ -254,7 +254,7 @@ test('blur, hidden tabs and mode switches clear held keycaps, pending flashes an
   for (const leave of [h => h.window.dispatch('blur', {}),h => h.window.dispatch('pagehide', {}),
     h => { h.document.hidden = true; h.document.dispatch('visibilitychange', {}); },
     h => h.click('inspect-toggle')]) {
-    const h = harness(); h.keyDown('s'); await h.tap('ArrowDown'); leave(h);
+    const h = harness(); h.keyDown('d'); await h.tap('ArrowDown'); leave(h);
     assert(h.buttons.every(button => !button.classList.contains('is-pressed')));
     await h.tick(700);
     assert(h.buttons.every(button => !button.classList.contains('is-pressed')));
@@ -327,7 +327,7 @@ test('shuffle can select every other song and continues across the full library 
     for (let j = 0; j < 6; j++) await h.tap('ArrowDown');
     await h.tap('Enter'); assert.equal(h.state().track, i);
     assert.equal(h.state().shuffle, true); assert.equal(h.state().playing, true);
-    sample = .999999; await h.tap('s');
+    sample = .999999; await h.tap('d');
     assert.equal(h.state().track, (i + 12) % 13);
     assert.equal(h.state().playing, true);
   }
@@ -335,7 +335,7 @@ test('shuffle can select every other song and continues across the full library 
 
 test('sequential skips wrap 13 songs while paused and About reports the full count', async () => {
   const h = harness({ library });
-  for (let i = 1; i <= 13; i++) { await h.tap('s'); assert.equal(h.state().track, i % 13); }
+  for (let i = 1; i <= 13; i++) { await h.tap('d'); assert.equal(h.state().track, i % 13); }
   assert.equal(h.state().playing, false);
   assert.equal(h.calls.filter(c => c.method === 'play').length, 0);
   for (let i = 0; i < 5; i++) await h.tap('ArrowDown');
@@ -345,41 +345,41 @@ test('sequential skips wrap 13 songs while paused and About reports the full cou
   assert(h.get('screen').innerHTML.includes('Songs<tspan x="216" text-anchor="end">13</tspan>'));
 });
 
-test('S tap skips once; S hold seeks repeatedly and release stops seeking', async () => {
+test('D tap skips once; D hold seeks repeatedly and release stops seeking', async () => {
   const h = harness();
-  h.keyDown('s'); await h.tick(419);
+  h.keyDown('d'); await h.tick(419);
   assert.equal(h.state().track, 0, 'tap must not skip before release');
-  h.keyUp('s'); await flush();
+  h.keyUp('d'); await flush();
   assert.equal(h.state().track, 1);
-  h.keyDown('s'); await h.tick(420);
+  h.keyDown('d'); await h.tick(420);
   assert.equal(h.state().position, 5);
   assert.equal(h.state().track, 1, 'hold must seek the current track');
   await h.tick(480); assert.equal(h.state().position, 15);
-  h.keyUp('s'); await h.tick(1000);
+  h.keyUp('d'); await h.tick(1000);
   assert.equal(h.state().position, 15, 'release must cancel seek interval');
   assert.equal(h.state().track, 1, 'hold release must not also skip');
   assert.equal(h.state().playing, false, 'seeking while paused must stay paused');
 });
 
-test('D hold rewinds; a tap restarts or chooses the previous track', async () => {
+test('S hold rewinds; a tap restarts or chooses the previous track', async () => {
   const h = harness();
-  h.keyDown('s'); await h.tick(900); h.keyUp('s');
+  h.keyDown('d'); await h.tick(900); h.keyUp('d');
   assert.equal(h.state().position, 15);
-  h.keyDown('d'); await h.tick(660); h.keyUp('d');
+  h.keyDown('s'); await h.tick(660); h.keyUp('s');
   assert.equal(h.state().position, 5);
   assert.equal(h.state().track, 0);
-  await h.tap('d'); assert.equal(h.state().position, 0);
-  assert.equal(h.state().track, 0, 'D after three seconds restarts current track');
-  await h.tap('d'); assert.equal(h.state().track, 2, 'D at track start wraps to previous');
+  await h.tap('s'); assert.equal(h.state().position, 0);
+  assert.equal(h.state().track, 0, 'S after three seconds restarts current track');
+  await h.tap('s'); assert.equal(h.state().track, 2, 'S at track start wraps to previous');
 });
 
 test('releasing an opposing key cannot release the active hold', async () => {
   const h = harness();
-  h.keyDown('s'); h.keyDown('d'); h.keyUp('d');
+  h.keyDown('d'); h.keyDown('s'); h.keyUp('s');
   assert.equal(h.state().track, 0);
-  assert.equal(h.state().hold.owner, 'key:s');
+  assert.equal(h.state().hold.owner, 'key:d');
   await h.tick(420); assert.equal(h.state().position, 5);
-  h.keyUp('s'); await h.tick(480);
+  h.keyUp('d'); await h.tick(480);
   assert.equal(h.state().position, 5);
   assert.equal(h.state().hold, null);
   assert.equal(h.state().track, 0);
@@ -395,7 +395,7 @@ test('pause preserves position; paused next stays silent and resumes new track a
   assert.equal(h.calls.filter(call => call.method === 'play').at(-1).offset, 1.25);
   await h.tap('a');
   const playCount = h.calls.filter(call => call.method === 'play').length;
-  await h.tap('s');
+  await h.tap('d');
   assert.equal(h.state().track, 1); assert.equal(h.state().position, 0);
   assert.equal(h.state().playing, false);
   assert.equal(h.calls.filter(call => call.method === 'play').length, playCount);
@@ -434,9 +434,9 @@ test('trackpad and arrows clamp volume to zero and one', async () => {
 
 test('blur cancels a pending tap and an active seek', async () => {
   const h = harness();
-  h.keyDown('s'); h.window.dispatch('blur', {}); await h.tick(700);
+  h.keyDown('d'); h.window.dispatch('blur', {}); await h.tick(700);
   assert.equal(h.state().track, 0); assert.equal(h.state().position, 0);
-  h.keyDown('s'); await h.tick(420); h.window.dispatch('blur', {});
+  h.keyDown('d'); await h.tick(420); h.window.dispatch('blur', {});
   await h.tick(1000); assert.equal(h.state().position, 5);
   assert.equal(h.state().hold, null);
 });
@@ -601,8 +601,8 @@ test('inspection blocks normal control handlers but A and the play button still 
   const h = harness();
   await h.tap('ArrowRight'); await h.tap('i');
   const before = h.state();
-  for (const key of ['w', 's', 'd', 'v', 'Enter', 'Backspace']) await h.tap(key);
-  h.keyDown('s'); await h.tick(700); h.keyUp('s');
+  for (const key of ['w', 'd', 's', 'v', 'Enter', 'Backspace']) await h.tap(key);
+  h.keyDown('d'); await h.tick(700); h.keyUp('d');
   for (const button of h.buttons.filter(button => button.dataset.action !== 'play')) {
     // Even direct dispatch (bypassing native disabled behavior) must be guarded.
     button.dispatch('click', {});
@@ -686,12 +686,12 @@ test('inspection cancellation, lost capture, blur, pose reset and exit all stop 
 
 test('entering inspection cancels pending and active seek holds without a later track skip', async () => {
   const h = harness();
-  h.keyDown('s'); await h.tick(200); h.click('inspect-toggle');
-  await h.tick(1000); h.keyUp('s');
+  h.keyDown('d'); await h.tick(200); h.click('inspect-toggle');
+  await h.tick(1000); h.keyUp('d');
   assert.equal(h.state().position, 0); assert.equal(h.state().track, 0); assert.equal(h.state().hold, null);
   await h.tap('Escape');
-  h.keyDown('s'); await h.tick(420); assert.equal(h.state().position, 5);
-  await h.tap('i'); await h.tick(1000); h.keyUp('s');
+  h.keyDown('d'); await h.tick(420); assert.equal(h.state().position, 5);
+  await h.tap('i'); await h.tick(1000); h.keyUp('d');
   assert.equal(h.state().position, 5); assert.equal(h.state().track, 0); assert.equal(h.state().hold, null);
   await h.tap('Escape'); await h.tick(1000); assert.equal(h.state().position, 5);
 });

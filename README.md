@@ -32,8 +32,8 @@ python3 skills/mini-mementos/scripts/sync_modules.py . --check
 | ← | Go back |
 | W | Menu / back |
 | A / Space | Play or pause |
-| S | Next track; hold to fast-forward |
-| D | Restart or previous track; hold to rewind |
+| S | Restart or previous track; hold to rewind |
+| D | Next track; hold to fast-forward |
 | Trackpad scroll over the player | Browse menus, adjust volume, or seek |
 | Drag around the click-wheel ring | Browse menus, adjust volume, or seek |
 | Centre button in Now Playing | Switch between volume and seeking |

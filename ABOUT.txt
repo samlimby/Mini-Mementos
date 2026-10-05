@@ -10,8 +10,8 @@ Controls
   Arrow Left  Back
   W  Menu / back
   A / Space  Play or pause
-  S  Next track; hold to fast-forward
-  D  Previous track or restart; hold to rewind
+  S  Previous track or restart; hold to rewind
+  D  Next track; hold to fast-forward
   Trackpad scroll over the device / drag around the ring  Browse or adjust volume
   Centre button in Now Playing  Switch the wheel between volume and seeking
   Matching keyboard keys depress the on-page keycaps while held.

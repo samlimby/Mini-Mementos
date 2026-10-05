@@ -67,7 +67,7 @@ Text/icons stay Gray 11. Pressed appearance uses a 1px bottom border and 4px top
 
 Explore uses two rows: Up/Down + browse; Left/Right + back / select. Use an 8px gap between items and 8px row spacing. Arrow SVGs are 12px × 12px using the Central Icons paths in the reference.
 
-Playback uses two rows: W + menu, A + play / pause; S + forward, D + rewind. The first pair in each row occupies a non-shrinking **88px slot**, followed by an **8px row gap**. Every key-to-label gap is **8px**; the D/rewind pair is also 88px wide. This aligns W/S, menu/forward, A/D, and play/rewind without text-length-dependent offsets.
+Playback uses two rows: W + menu, A + play / pause; S + rewind, D + forward. The first pair in each row occupies a non-shrinking **88px slot**, followed by an **8px row gap**. Every key-to-label gap is **8px**; the D/forward pair is also 88px wide. This aligns W/S, menu/rewind, A/D, and play/forward without text-length-dependent offsets.
 
 Wheel copy has two lines, 10px with a 1.85 line-height:
 
