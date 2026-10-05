@@ -4,25 +4,6 @@ A repostory containing isometric, interactive models of devices/objects that hol
 
 All of the models here are standalone HTML file. With them using SVG, CSS, JavaScript, and the Web Audio API, with no build step or runtime dependencies. Fonts, icons, artwork, geometry, and audio code are embedded for offline use.
 
-
-## Run locally
-
-Open `index.html` directly, or start the local preview from this directory:
-
-```sh
-python3 -m http.server 3500 --bind 127.0.0.1
-```
-
-Then open [localhost:3500](http://localhost:3500/). Press **S** or the play keycap to start sound; browsers require a user gesture before audio can play.
-
-The behavioral checks need only Node.js:
-
-```sh
-node tests/interaction-check.cjs
-node tests/audio-library-check.cjs
-python3 skills/mini-mementos/scripts/sync_modules.py . --check
-```
-
 ## iPod Nano (3rd Gen) controls
 
 | Input | Action |
