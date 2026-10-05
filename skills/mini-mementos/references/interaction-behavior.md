@@ -4,7 +4,7 @@
 
 Use one action layer for pointer, keyboard, wheel, and shortcut buttons. Keep playback/menu state separate from camera state. Entering inspection, changing the page theme, or toggling front/isometric views must not reset the library, menu selection, volume, position, or active audio.
 
-The iPod reference maps Up/Down to browse, Right/Enter to select, Left to back, W to menu, A/Space to play/pause, S to previous/restart/held seek backward, and D to next/held seek forward. These mappings reflect this user's requested controls; choose meaningful mappings for a different object.
+The iPod reference maps Up/Down to browse, Right/Enter to select, Left to back, W to menu, A to previous/restart/held seek backward, S/Space to play/pause, and D to next/held seek forward. These mappings reflect this user's requested controls; choose meaningful mappings for a different object.
 
 ### Keyboard keycap feedback
 
@@ -18,11 +18,11 @@ Maintain physical-key ownership separately from action/cap state:
 - Cancel a pending release timer when a new press starts. An older timer must never release a newer press.
 - On blur, hidden tabs, page exit, or a mode switch, clear caps, owners, release timers, and pending/active held actions.
 
-Enter/Space on a focused native button should highlight that button and let its native click run once. It must not also fire a global shortcut or incorrectly highlight the play cap. Camera arrow keys in inspection should not depress disabled player caps; A/Space may still depress the enabled play cap.
+Enter/Space on a focused native button should highlight that button and let its native click run once. It must not also fire a global shortcut or incorrectly highlight the play cap. Camera arrow keys in inspection should not depress disabled player caps; S/Space may still depress the enabled play cap.
 
 ## Tap, hold, and ring gestures
 
-S/D taps and holds share controls but have different effects. A pending hold records its owner; crossing the hold threshold starts seeking, while a short release executes exactly one track action. Opposing key releases or another pointer must not end the active owner's hold. Cancel holds during mode changes and blur so a later timer cannot skip a track.
+A/D taps and holds share controls but have different effects. A pending hold records its owner; crossing the hold threshold starts seeking, while a short release executes exactly one track action. Opposing key releases or another pointer must not end the active owner's hold. Cancel holds during mode changes and blur so a later timer cannot skip a track.
 
 The ring supports both trackpad scrolling and circular dragging. In menus it browses; in Now Playing it adjusts volume or seeks, with the center button switching the wheel mode. Convert input to local wheel coordinates and normalize wheel units. Clamp volume and seek bounds.
 
@@ -56,7 +56,7 @@ The reference supports:
 - Scroll or +/- for zoom, normalized wheel units and fixed bounds; Ctrl-pinch does not also apply wheel zoom.
 - Arrows for camera steps, Shift for fine steps.
 - F/B for front/back, R for the initial inspection pose.
-- A/Space for the same live playback action.
+- S/Space for the same live playback action.
 - Done inspecting for a graceful return; Escape/I for an immediate exit.
 
 These camera shortcuts can remain discoverable in accessible descriptions without adding the removed helper toolbar back to the visual presentation.

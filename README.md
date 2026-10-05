@@ -13,7 +13,7 @@ Open `index.html` directly, or start the local preview from this directory:
 python3 -m http.server 3500 --bind 127.0.0.1
 ```
 
-Then open [localhost:3500](http://localhost:3500/). Press **A** or the play keycap to start sound; browsers require a user gesture before audio can play.
+Then open [localhost:3500](http://localhost:3500/). Press **S** or the play keycap to start sound; browsers require a user gesture before audio can play.
 
 The behavioral checks need only Node.js:
 
@@ -31,8 +31,8 @@ python3 skills/mini-mementos/scripts/sync_modules.py . --check
 | → / Enter | Select |
 | ← | Go back |
 | W | Menu / back |
-| A / Space | Play or pause |
-| S | Restart or previous track; hold to rewind |
+| A | Restart or previous track; hold to rewind |
+| S / Space | Play or pause |
 | D | Next track; hold to fast-forward |
 | Trackpad scroll over the player | Browse menus, adjust volume, or seek |
 | Drag around the click-wheel ring | Browse menus, adjust volume, or seek |
@@ -52,7 +52,7 @@ Choose **3D view** or press **I** to inspect the rounded casing, ports, and engr
 | Arrow keys | Rotate; hold Shift for finer steps |
 | F / B | Face the front / back toward you |
 | R | Reset the inspection angle and zoom |
-| A / Space | Play or pause |
+| S / Space | Play or pause |
 | Done inspecting | Smoothly return to the isometric player |
 | Escape / I | Return immediately |
 

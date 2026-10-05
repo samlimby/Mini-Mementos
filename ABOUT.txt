@@ -9,8 +9,8 @@ Controls
   Arrow Right / Enter  Select
   Arrow Left  Back
   W  Menu / back
-  A / Space  Play or pause
-  S  Previous track or restart; hold to rewind
+  A  Previous track or restart; hold to rewind
+  S / Space  Play or pause
   D  Next track; hold to fast-forward
   Trackpad scroll over the device / drag around the ring  Browse or adjust volume
   Centre button in Now Playing  Switch the wheel between volume and seeking
@@ -27,7 +27,7 @@ Inspection
   Done inspecting  Smoothly settle back to the isometric player view
   Escape / I  Return immediately to the isometric player view
   Grab the iPod during its return to keep inspecting from that angle.
-  Music continues during inspection. A / Space still plays or pauses.
+  Music continues during inspection. S / Space still plays or pauses.
 
 Sound begins after pressing play, because browsers require an audio gesture.
 Thirteen original electronic instrumentals are synthesized locally with Web Audio.

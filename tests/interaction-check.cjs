@@ -200,7 +200,7 @@ const depressed = (h, action) => keycap(h, action).classList.contains('is-presse
 
 test('every displayed keyboard shortcut depresses immediately, stays held through repeat and releases', async () => {
   for (const [key, action] of [['ArrowUp','up'],['ArrowDown','down'],['ArrowLeft','back'],['ArrowRight','select'],
-    ['W','menu'],['a','play'],['d','next'],['s','previous']]) {
+    ['W','menu'],['s','play'],['d','next'],['a','previous']]) {
     const h = harness(); h.keyDown(key);
     assert(depressed(h, action), key);
     assert.equal(h.buttons.filter(button => button.classList.contains('is-pressed')).length, 1);
@@ -226,8 +226,8 @@ test('shortcut aliases share the correct keycap without releasing another held a
     const h = harness(); h.keyDown(key); assert(depressed(h, action));
     await h.tick(100); h.keyUp(key); assert.equal(depressed(h, action), false);
   }
-  const h = harness(); h.keyDown('a'); h.keyDown(' '); await h.tick(100);
-  h.keyUp('A'); assert(depressed(h, 'play'), 'Space still owns the play keycap');
+  const h = harness(); h.keyDown('s'); h.keyDown(' '); await h.tick(100);
+  h.keyUp('S'); assert(depressed(h, 'play'), 'Space still owns the play keycap');
   h.keyUp(' '); assert.equal(depressed(h, 'play'), false);
 });
 
@@ -244,7 +244,7 @@ test('editing and modified commands never depress keycaps or trigger player shor
   for (const options of [{ metaKey: true },{ ctrlKey: true },{ altKey: true },
     { target: { tagName: 'INPUT' } },{ target: { tagName: 'TEXTAREA' } },
     { target: { tagName: 'DIV', isContentEditable: true } }]) {
-    const h = harness(); h.keyDown('a', options);
+    const h = harness(); h.keyDown('s', options);
     assert(h.buttons.every(button => !button.classList.contains('is-pressed')));
     assert.equal(h.calls.filter(call => call.method === 'play').length, 0);
   }
@@ -265,8 +265,8 @@ test('blur, hidden tabs and mode switches clear held keycaps, pending flashes an
   }
   const h = harness(); h.click('inspect-toggle'); h.keyDown('ArrowUp');
   assert.equal(depressed(h, 'up'), false, 'camera keys do not depress disabled player controls');
-  h.keyDown('a'); assert(depressed(h, 'play'), 'play remains available during inspection');
-  await h.tick(100); h.keyUp('a'); assert.equal(depressed(h, 'play'), false);
+  h.keyDown('s'); assert(depressed(h, 'play'), 'play remains available during inspection');
+  await h.tick(100); h.keyUp('s'); assert.equal(depressed(h, 'play'), false);
 });
 
 test('the standalone file includes the complete 13-song audio library', () => {
@@ -361,21 +361,21 @@ test('D tap skips once; D hold seeks repeatedly and release stops seeking', asyn
   assert.equal(h.state().playing, false, 'seeking while paused must stay paused');
 });
 
-test('S hold rewinds; a tap restarts or chooses the previous track', async () => {
+test('A hold rewinds; a tap restarts or chooses the previous track', async () => {
   const h = harness();
   h.keyDown('d'); await h.tick(900); h.keyUp('d');
   assert.equal(h.state().position, 15);
-  h.keyDown('s'); await h.tick(660); h.keyUp('s');
+  h.keyDown('a'); await h.tick(660); h.keyUp('a');
   assert.equal(h.state().position, 5);
   assert.equal(h.state().track, 0);
-  await h.tap('s'); assert.equal(h.state().position, 0);
-  assert.equal(h.state().track, 0, 'S after three seconds restarts current track');
-  await h.tap('s'); assert.equal(h.state().track, 2, 'S at track start wraps to previous');
+  await h.tap('a'); assert.equal(h.state().position, 0);
+  assert.equal(h.state().track, 0, 'A after three seconds restarts current track');
+  await h.tap('a'); assert.equal(h.state().track, 2, 'A at track start wraps to previous');
 });
 
 test('releasing an opposing key cannot release the active hold', async () => {
   const h = harness();
-  h.keyDown('d'); h.keyDown('s'); h.keyUp('s');
+  h.keyDown('d'); h.keyDown('a'); h.keyUp('a');
   assert.equal(h.state().track, 0);
   assert.equal(h.state().hold.owner, 'key:d');
   await h.tick(420); assert.equal(h.state().position, 5);
@@ -387,19 +387,19 @@ test('releasing an opposing key cannot release the active hold', async () => {
 
 test('pause preserves position; paused next stays silent and resumes new track at zero', async () => {
   const h = harness();
-  await h.tap('a'); assert.equal(h.state().playing, true);
-  await h.tick(1250); await h.tap('a');
+  await h.tap('s'); assert.equal(h.state().playing, true);
+  await h.tick(1250); await h.tap('s');
   assert.equal(h.state().playing, false); assert.equal(h.state().position, 1.25);
   await h.tick(1000); assert.equal(h.state().position, 1.25);
-  await h.tap('a');
+  await h.tap('s');
   assert.equal(h.calls.filter(call => call.method === 'play').at(-1).offset, 1.25);
-  await h.tap('a');
+  await h.tap('s');
   const playCount = h.calls.filter(call => call.method === 'play').length;
   await h.tap('d');
   assert.equal(h.state().track, 1); assert.equal(h.state().position, 0);
   assert.equal(h.state().playing, false);
   assert.equal(h.calls.filter(call => call.method === 'play').length, playCount);
-  await h.tap('a');
+  await h.tap('s');
   const call = h.calls.filter(call => call.method === 'play').at(-1);
   assert.deepEqual(call, { method: 'play', track: 1, offset: 0 });
   assert.equal(h.state().playing, true);
@@ -421,7 +421,7 @@ test('nested menus and back preserve each parent selection', async () => {
 
 test('trackpad and arrows clamp volume to zero and one', async () => {
   const h = harness();
-  await h.tap('a'); await h.tap('a');
+  await h.tap('s'); await h.tap('s');
   for (let i = 0; i < 6; i++) await h.wheel(144);
   assert.equal(h.state().volume, 1);
   for (let i = 0; i < 6; i++) await h.wheel(-144);
@@ -511,7 +511,7 @@ test('frame gestures respect pointer ownership and clear on cancellation or blur
 
 test('rapid camera toggles preserve playback and settle on the last requested view', async () => {
   const h = harness();
-  await h.tap('a'); await h.tick(1000);
+  await h.tap('s'); await h.tick(1000);
   const before = h.state();
   const audioCalls = h.calls.filter(call => call.method === 'play' || call.method === 'pause').length;
   for (let i = 0; i < 9; i++) h.frameClick(i % 2 ? 'device' : 'plate');
@@ -544,7 +544,7 @@ test('front camera yields equal-length orthogonal face axes and the intended cen
 
 test('inspection toggle preserves live playback and menu state while updating access and control state', async () => {
   const h = harness();
-  await h.tap('a'); await h.tick(1000); await h.tap('w');
+  await h.tap('s'); await h.tick(1000); await h.tap('w');
   const before = h.state();
   const audioCalls = h.calls.filter(call => call.method === 'play' || call.method === 'pause').length;
   h.click('inspect-toggle');
@@ -597,11 +597,11 @@ test('inspection keyboard shortcuts rotate the camera and exit without menu navi
   await h.tap('i'); assert.equal(h.state().inspect, false); assert.equal(h.state().page, 'music');
 });
 
-test('inspection blocks normal control handlers but A and the play button still toggle audio in place', async () => {
+test('inspection blocks normal control handlers but S and the play button still toggle audio in place', async () => {
   const h = harness();
   await h.tap('ArrowRight'); await h.tap('i');
   const before = h.state();
-  for (const key of ['w', 'd', 's', 'v', 'Enter', 'Backspace']) await h.tap(key);
+  for (const key of ['w', 'd', 'a', 'v', 'Enter', 'Backspace']) await h.tap(key);
   h.keyDown('d'); await h.tick(700); h.keyUp('d');
   for (const button of h.buttons.filter(button => button.dataset.action !== 'play')) {
     // Even direct dispatch (bypassing native disabled behavior) must be guarded.
@@ -610,7 +610,7 @@ test('inspection blocks normal control handlers but A and the play button still 
   await h.wheel(144); h.frameClick('device');
   for (const key of ['page', 'selected', 'track', 'volume', 'position', 'playing', 'facing']) assert.equal(h.state()[key], before[key], key);
   assert.equal(h.state().hold, null);
-  await h.tap('a'); assert.equal(h.state().playing, true); assert.equal(h.state().page, before.page);
+  await h.tap('s'); assert.equal(h.state().playing, true); assert.equal(h.state().page, before.page);
   h.buttons.find(button => button.dataset.action === 'play').dispatch('click', {}); await flush();
   assert.equal(h.state().playing, false); assert.equal(h.state().page, before.page);
   assert.equal(h.state().inspect, true);
@@ -817,7 +817,7 @@ test('Escape, I and reduced motion return immediately and cancel any in-flight a
 });
 
 test('return animation preserves menu, volume and uninterrupted live audio until controls are restored', async () => {
-  const h = harness(); await h.tap('a'); await h.tick(1000); await h.tap('w');
+  const h = harness(); await h.tap('s'); await h.tick(1000); await h.tap('w');
   const before = h.state();
   const audioCalls = h.calls.filter(call => call.method === 'play' || call.method === 'pause').length;
   h.click('inspect-toggle'); h.keyDown('b'); h.click('inspect-toggle');
