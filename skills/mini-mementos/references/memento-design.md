@@ -16,7 +16,8 @@ Use this preset to reproduce the design developed in isometric-mementos. These a
 | Caption | Flex row, space-between, wrap, 12px gap |
 | Figure label | Roboto Mono Medium 500, 12px/16px, .045em tracking |
 | Product caption | Roboto Mono Regular 400, 10px/12px, .15em tracking |
-| Theme | Right aligned, 16px icon, 8px gap, 36px label slot |
+| Header credit | `Made by Sam Limby`, left aligned; match theme text at 11px/16px Regular, .04em tracking, Gray 11 |
+| Theme | Right aligned on the same centered row as the credit, 16px icon, 8px gap, 36px label slot |
 | 3D view | Bottom right inside plate; 16px icon, 8px gap, 11px/16px text |
 | Controls | Three columns in ratios 1.05:1:1.2, 28px gaps, padding 26px 5px 24px |
 
@@ -26,7 +27,7 @@ The reference's caption, scene, and inspection toolbar have `width:calc(100% + 2
 
 At 700px and below: page padding 20px 12px, plate padding 24px 17px 12px, two control columns with 22px gaps and the wheel instructions spanning both. At 520px and below: one column.
 
-Keep the presentation sparse. Retain the figure label, product caption, theme control, useful shortcut groups, wheel instructions, and optional 3D control. The user removed the branding eyebrow, decorative slogans, separate status strip, nostalgic footer/play CTA, dotted inner boundary, and inspection helper toolbar.
+Keep the presentation sparse. Retain the figure label, product caption, quiet author credit, theme control, useful shortcut groups, wheel instructions, and optional 3D control. The earlier promotional branding eyebrow was removed; the later requested author credit is intentional. Omit decorative slogans, separate status strip, nostalgic footer/play CTA, dotted inner boundary, and inspection helper toolbar.
 
 ## Typography and neutral colors
 

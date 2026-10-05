@@ -44,7 +44,7 @@ Use the supplied figure label and product name exactly, including capitalization
 
 Show useful controls without reinstating removed decorative copy. This preset has no brand eyebrow, lower-left slogan, separate playback readout, promotional footer, dashed inner outline, or front/back/reset toolbar. Put playback state on the device's display. Surface additional controls only when the user requests them or they are necessary to operate the result.
 
-The theme control has a 16px icon and a reserved label slot so Light/Dark does not move the icon. Optional inspection appears as **3D view**, changing to **Done inspecting** while active. Shortcut arrows use the supplied icon family rather than text glyph substitutes.
+The example header places `Made by Sam Limby` on the left and the theme control on the right, aligned on one row with matching 11px/16px Roboto Mono text. Keep the author configurable for another project. The theme control has a 16px icon and a reserved label slot so Light/Dark does not move the icon. Optional inspection appears as **3D view**, changing to **Done inspecting** while active. Shortcut arrows use the supplied icon family rather than text glyph substitutes.
 
 For the original technical line-art style, retain the same geometry and interaction principles but use flat monochrome surfaces and optional functional corner captions. Colored physical materials and subtle highlights are part of the memento preset.
 
